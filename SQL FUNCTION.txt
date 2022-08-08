@@ -1,0 +1,55 @@
+-- primer hola mundo en sql de programacion 
+-- hola mundo 
+create function clinica.holamundo(mensaje varchar (20)) returns varchar(20) as $$
+declare
+begin 
+return mensaje;
+end;
+$$ language plpgsql;
+-- llamamos la funcion 
+select clinica.holamundo('Hola desde pl/pgsql');
+-- funcion q sume dos numero con parametros y p
+create or replace function clinica.SumaNumero(numer1 int ,numero2 int )returns int as $$
+begin
+return numer1+numero2;
+end;
+$$ language plpgsql;
+
+select clinica.SumaNumero(223432132,2)
+-- funcion de multipliacion 
+create or replace function clinica.MultiplicarNumero(numero1 int ,numero2 int )returns int as $$
+begin
+return numero1*numero2;
+end;
+$$ language plpgsql;
+
+select clinica.MultiplicarNumero(5,5)
+
+create or replace function clinica.MultiplicarNumero(numero1 int ,numero2 int,numero3 int  )returns int as $$
+begin
+return numero1*numero2+numero3;
+end;
+$$ language plpgsql;
+select clinica.MultiplicarNumero(5,5,10)
+-- funcions de resta 
+create or replace function clinica.RestaNumero(numero1 int ,numero2 int )returns int as $$
+begin
+return numero1-numero2;
+end;
+$$ language plpgsql;
+
+select clinica.RestaNumero(10,1)
+-- if else en funcion || concatenamos
+create or replace function clinica.NumeroMayorMenor(numero1 int,numero2 int)returns varchar(30) as $$
+begin
+if numero1>numero2 then 
+return 'el numero :'|| numero1|| 'es mayor  que el numero '||numero2;
+elseif numero1<numero2 then 
+return 'el numero :'|| numero1|| 'es menor  que el numero '||numero2;
+else 
+return 'el numero :'|| numero1|| 'es igual  que el numero '||numero2;
+end if;
+end;
+$$ language plpgsql;
+
+select clinica.NumeroMayorMenor(1,10)

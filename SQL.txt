@@ -1,0 +1,27 @@
+select * from "esquema"."PEDIDOS";
+create table "esquema".tabla_antigua(
+	Id integer not null,
+	producto varchar(10) not null,
+	cantidad integer not null ,
+	importe integer not null,
+	fecha date not null 
+)
+select * from "esquema"."tabla_antigua"
+create function SP_test() returns Trigger
+as 
+$$
+begin 
+insert into "esquema"."tabla_antigua" values (old.ID,old.PRODUCTO,old.CANTIDAD,old.IMPORTE,old.FECHA);
+return new ;
+End 
+$$
+language plpgsql;
+create trigger TR_update before Update on "esquema"."tabla_antigua"
+for each row 
+execute procedure SP_Test();
+update "esquema"."PEDIDOS" set 
+"PEDIDOS"."PRODUCTO" ='MAC',
+"PEDIDOS"."CANTIDAD"=3,
+"PEDIDOS"."IMPORTE" =100,
+"PEDIDOS"."FECHA" = 2020-08-01
+WHERE"esquema"."PEDIDOS"."PRODUCTO"='USB'

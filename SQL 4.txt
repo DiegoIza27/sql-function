@@ -1,0 +1,32 @@
+-- grup by y order by
+select fk_idespecialista from clinica.expediente_diagnostico group by fk_idespecialista
+select * from clinica.expediente_diagnostico
+select count (nivelPeso) as cantidad_peso , nivelpeso from clinica.expediente_diagnostico group by nivelpeso
+select fk_idpaciente ,avg(cast(peso as int)) as promedio_peso from clinica.expediente_diagnostico group by fk_idpaciente order by fk_idpaciente asc 
+select * from clinica.expediente_diagnostico order by folio asc
+-- having  funciones de aregacio con el having 
+select * from clinica.especialista
+select fk_idespecialista, count (fk_idespecialista) as citas_a_realizar from clinica.expediente_diagnostico group by fk_idespecialista having count (fk_idespecialista)>1
+select fk_idpaciente, avg (cast(peso as int )) as promedio_peso from clinica.expediente_diagnostico group by fk_idpaciente ,peso having avg (cast (peso as int ))>70
+-- distinct nos deveuelve dato no repetidos 
+select distinct fk_idpaciente as llave_foranea from clinica.expediente_diagnostico order by fk_idpaciente
+select  fk_idpaciente from clinica.expediente_diagnostico order by fk_idpaciente
+-- limit limita la canditad de registro de una consulta 
+select nombre from clinica.paciente  order by nombre asc limit 2
+select * from clinica.expediente_diagnostico order by folio desc limit 5;
+-- join realciona dos o mas tablas 
+-- inner join
+select * from clinica.paciente
+select * from clinica.paciente inner join clinica.expediente on paciente.pk_idpaciente=expediente.pk_idpaciente where PACIENTE.pk_idpaciente ='P-0001'
+select * from clinica.expediente left join clinica.paciente  on paciente.pk_idpaciente = expediente.pk_idpaciente
+insert into clinica.paciente values ('P-0011','DIEGO','IZA','M','MADRID','ESPAÑA','123213123')
+--inner join aninado 
+select * from clinica.cita 
+select * from clinica.paciente 
+inner join clinica.cita
+on paciente.pk_idpaciente = cita.fk_idpaciente
+inner join clinica.agendar_cita
+on cita.pk_idcita = agendar_cita.fk_idcita
+inner join clinica.especialista
+on agendar_cita.fk_idespecialista = especialista.pk_idespecialista
+inner join clinica.expediente_diagnostico on especialista 

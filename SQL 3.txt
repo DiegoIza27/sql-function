@@ -1,0 +1,45 @@
+select * from clinica.paciente
+-- * traer todas las columnas extraer absolutamente todo 
+--consultas por columnas 
+select pk_idpaciente,nombre,apellido from clinica.paciente
+--cosultas con condicionales 
+select * from clinica.paciente where sexo='M'
+select * from clinica.paciente where ciudad='MEXICO'
+SELECT * FROM CLINICA.PACIENTE WHERE SEXO='M' OR   CIUDAD ='MEXICO'
+SELECT * FROM CLINICA.PACIENTE WHERE ESTADO in('MADRID') or ciudad in('MONTERREY')
+SELECT * FROM CLINICA.PACIENTE WHERE ESTADO  not in('MADRID') and  ciudad not in('MONTERREY')
+-- like extraeme los apellidos de los pocientes q termine en Z '%Z'
+select * from clinica.paciente where apellido like '%Z'
+-- nombre tenga una A
+select * from clinica.paciente where nombre like '%A%'
+-- ejemplos mas de consultas between es entre este intervalo 
+select * from clinica.agendar_cita where (fecha between '2022-10-01' and '2022-10-06' ) and (turno='MATUTINO')
+select * from clinica.expediente_diagnostico where edad<'30'
+select * from clinica.expediente_diagnostico where edad>='30'
+select* from clinica.expediente_diagnostico  where nivelpeso !='OBESIDAD'
+select folio,fk_idespecialista,fk_idpaciente,fechacreacion,edad from clinica.expediente_diagnostico where nivelpeso!='NORMAL' and edad between  '30' and '40'
+--funcion count 
+-- armeticas
+select count (*) as cantidad_paciente from clinica.paciente
+select count (*) as cantidad_paciente from clinica.paciente where ciudad='MEXICO'
+select * from clinica.paciente
+--  funcion sum  suma la catidad solo suma interger tipo de atributo interger
+select * from clinica.expediente_diagnostico  
+select sum (folio) from clinica.expediente_diagnostico  
+select * from clinica.expediente_diagnostico
+-- cast permite convertir datos de caracter a interger nombre_atributo as tipo_dato
+select sum ( cast (edad as int )) as suma_edad from clinica.expediente_diagnostico
+select sum ( cast (peso as int )) as suma_peso from clinica.expediente_diagnostico
+--max 
+select max (cast (peso as int  )) as maximo_peso from  clinica.expediente_diagnostico
+select max (edad) as maximo_edad from  clinica.expediente_diagnostico
+--min
+select min (edad) as minimo_edad from  clinica.expediente_diagnostico
+--avg promedio 
+select avg (cast (edad as int )) as promedio_edad from  clinica.expediente_diagnostico
+select avg (cast (peso as int )) as promedio_peso from  clinica.expediente_diagnostico
+-- cambinar funciones de agragacion
+select max(edad) as edad_maxima , min (edad) as edad_minima, sum(cast(edad as int )) as suma_edad,
+avg (cast (edad as int )) as edad_promedio,count (*) as cantidad_diagnostico  from clinica.expediente_diagnostico
+
+
